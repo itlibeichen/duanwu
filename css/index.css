@@ -1,0 +1,147 @@
+.index{
+    width:7.5rem;
+    background: red;
+    margin: 0 auto;
+}
+.banner {
+    width:7.5rem;
+    height:3rem;
+    background: #000;
+}
+.douandzuan{
+    width:7.5rem;
+    height:1.5rem;
+    background: green;
+}
+.jiqi{
+    width:7.5rem;
+    height:1rem;
+    background: yellow;
+}
+.shijian{
+    width:7.5rem;
+    height:1rem;
+}
+.flash{
+    width:7.5rem;
+    background: #00cc99;
+}
+.flash h2{
+    font-size:0.3rem;
+    text-align: center;
+}
+.flash p{
+    margin:0.2rem 0 0 0;
+    font-size:0.3rem;
+    text-align: center;
+}
+.dan{
+    width: 7.5rem;
+    background: #0f7595;
+    overflow: hidden;
+    position: relative;
+}
+.inFoMa{
+    width:7.5rem;
+    height:5rem;
+    background: #000;
+}
+.long{
+    width: 7.5rem;
+    height: 5rem;
+    background: #ccc;
+    position: relative;
+    overflow: hidden;
+}
+.danBox{
+    width:1rem;
+    height:1rem;
+    background: #000;
+    position: absolute;
+    top:3rem;
+    right:1rem;
+}
+
+.chance i{
+    color: red;
+
+}
+
+.animateBox{
+    width:2rem;
+    height:2rem;
+    background: pink;
+    color: red;
+    font-size:0.2rem;
+    text-align:center;
+    line-height:2rem;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin:-1rem 0 0 -1rem;
+}
+.min-number{
+    width:7.5rem;
+    height:2rem;
+    line-height:2rem;
+    text-align: center;
+    font-size:0.2rem;
+    position: absolute;
+    bottom:0;
+    left:0;
+}
+.min-number i{
+    color: red;
+}
+/*.danBox2{*/
+    /*width:2rem;*/
+    /*height:2rem;*/
+    /*position: absolute;*/
+    /*background: #CCCCCC;*/
+    /*top:50%;*/
+    /*left:50%;*/
+    /*margin:-1rem 0 0 -1rem;*/
+/*}*/
+.dan ul{
+    width:7.5rem;
+    margin:1rem 0;
+}
+.dan ul li {
+    width:1rem;
+    height:1rem;
+    float: left;
+    position: relative;
+    text-align: center;
+    line-height:1rem;
+    margin:0 0.12rem;
+    background: #1a2c51;
+    font-size:0.2rem;
+}
+.thisBtn{
+    width:2rem;
+    height:1rem;
+    background: #ccc;
+    font-size:0.2rem;
+    text-align: center;
+    line-height:1rem;
+    margin:0 auto;
+}
+.contentBox{
+    width:100%;
+    height:2rem;
+    line-height:2rem;
+    font-size:0.2rem;
+    text-align: center;
+}
+.poo{
+
+    height:0.5rem;
+    background: #ccc;
+    position: absolute;
+    top:-0.2rem;
+    right:0;
+    color: #000;
+    font-size:0.2rem;
+    text-align: center;
+    line-height:0.5rem;
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="common.js"></script>
+    <script src="startMove.js"></script>
+    <script src="doMove.js"></script>
+</head>
+<body>
+<div class="index">
+    <div class="banner"></div>
+    <div class="douandzuan"></div>
+    <div class="jiqi"></div>
+    <div class="shijian"></div>
+    <div class="flash">
+        <h2>砸开扭蛋得印记 集齐粽子评分10亿蓝钻大红包</h2>
+        <p>1111111人已经集齐 用户昵称 刚刚获得印记</p>
+        <div class="dan">
+            <div class="long">
+                <!--点击粽子的机会-->
+                <p class="chance">您还有 <i>11111</i> 机会</p>
+                <div class="animateBox">animateBox</div>
+                <div class="min-number">您集齐了 <i>0</i> 套</div>
+                <div class="danBox"></div>
+            </div>
+            <ul class="ulBox clear">
+                <li>
+                    <span>印记</span>
+                    <div class="poo">2</div>
+                </li>
+                <li>
+                    <span>粽子1</span>
+                    <div class="poo">1</div>
+                </li>
+                <li>
+                    <span>粽子2</span>
+                    <div class="poo">2</div>
+                </li>
+                <li>
+                    <span>粽子3</span>
+                    <div class="poo">2</div>
+                </li>
+                <li>
+                    <span>粽子4</span>
+                    <div class="poo">2</div>
+                </li>
+                <li>
+                    <span>粽子5</span>
+                    <div class="poo">2</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="inFoMa"></div>
+    <div class></div>
+</div>
+</body>
+</html>
+<script>
+    addLoadEvent(function (){
+        var dan = document.querySelector('.dan');
+        var danBox = document.querySelector('.danBox');
+        var animateBox = document.querySelector('.animateBox');
+        var ulBoxLi = document.querySelector('.ulBox').querySelectorAll('li');
+        var timer = null;
+        var n = 0 ;
+        console.log(ulBoxLi[0].clientWidth + '这是一个小方块的宽度');
+
+        // 首先先记录一下 6个盒子的位置
+        var arrOffSetLeft = [];
+        var arrOffSetTop = [];
+
+        for(var i = 0 ; i < ulBoxLi.length ; i ++){
+            arrOffSetLeft.push(ulBoxLi[i].offsetLeft);
+            arrOffSetTop.push(ulBoxLi[i].offsetTop);
+        }
+        console.log(arrOffSetLeft + '这是所有小粽子的Left值');
+        console.log(arrOffSetTop + '这是所有小粽子的Top值');
+
+
+        // 集齐了多少套
+        // 思路从一个数组里找到最小的值,也就是套数
+        function getMaximin(arr,maximin) {
+            if(maximin=="max")
+            {
+                return Math.max.apply(Math,arr);
+            }
+            else if(maximin=="min")
+            {
+                return Math.min.apply(Math, arr);
+            }
+        }
+
+        // 获取一系列粽子已经有的数量
+        var poo = document.querySelectorAll('.poo');
+        var boxInnerHTML = [];
+        for(var i = 0 ; i < poo.length ; i ++){
+            if(!poo[i].innerHTML){
+                boxInnerHTML.push(poo[i].innerHTML = 0);
+            }else{
+                boxInnerHTML.push(poo[i].innerHTML);
+                ulBoxLi[i].style.background = 'red';
+            }
+        }
+        // console.log(getMaximin(boxInnerHTML,"min"));//04
+        console.log(getMaximin(boxInnerHTML,"min"));
+
+        // 集齐的套数上当进到页面的时候  我们就应该先执行一下函数  并且给页面赋值  首先先要声明一下变量
+        // 获取到最小的值
+        var minNumber = document.querySelector('.min-number i');
+        // 计算出应该获得的套数  然后进行赋值
+        minNumber.innerHTML = getMaximin(boxInnerHTML,"min");
+
+        function anitma () {
+            if(n>=15){
+                n = 15;
+                clearInterval(timer);
+                timer = setInterval(function (){
+                    n--;
+                    danBox.style.transform = "rotate"+'('+n+'deg'+')';
+                    danBox.style.webkitTransform = "rotate"+'('+n+'deg'+')';
+                    if(n <= -15){
+                        n = -15;
+                        clearInterval(timer);
+                        timer = setInterval(function (){
+                            n++;
+                            danBox.style.transform = "rotate"+'('+n+'deg'+')';
+                            danBox.style.webkitTransform = "rotate"+'('+n+'deg'+')';
+                            anitma ();
+                    },30);
+                    }
+                },30);
+            }
+        }
+
+        function aniGo () {
+            clearInterval(timer);
+            timer = setInterval(function (){
+                n++;
+                danBox.style.transform = "rotate"+'('+n+'deg'+')';
+                danBox.style.webkitTransform = "rotate"+'('+n+'deg'+')';
+                anitma ();
+            },30);
+        }
+
+        // aniGo();是让黑色方块动的
+        aniGo ();
+
+        // 进页面的时候首先要获得还有几次的机会假设是5次; ajax
+        var chance = 5;
+        // 然后赋值给相应的innerHTML
+        var chanceI = document.querySelector('.chance i');
+        chanceI.innerHTML = chance;
+        // 首先我们在进页面的时候获取到移动目标的top值
+        var animateBoxTop = animateBox.offsetTop;
+        // 为了产品的高端需求我也只能用click
+        danBox.addEventListener('click',function (){
+            if(chance <= 0){
+                alert('机会没了！');
+                // 当机会没有了就不在执行以下程序
+                return;
+            }
+        // 首先animateBox跳动一波在执行其他的
+        move(animateBox,{top:parseFloat(animateBoxTop)+20,marginTop:parseFloat(animateBoxTop)-80},{complete:function (){
+            move(animateBox,{top:animateBoxTop,marginTop:parseFloat(animateBoxTop)-80},{complete:function (){
+                if(chance <= 0){
+                    alert('机会没了！');
+                    // 当机会没有了就不在执行以下程序
+                    return;
+                }
+                // 直接开始减掉机会
+                chance--;
+                // 然后重新给机会赋值;
+                chanceI.innerHTML = chance;
+                console.log(chance);
+                var ImgBox = 1; //ajax后得到的
+                var timer = null;
+                var index = document.querySelector('.index');
+                // 动态的创建一个弹框底层
+                var Box = document.createElement('div');
+                // 控制一下数组  因为需要知道是哪个获得了 所以自身加一
+                boxInnerHTML[ImgBox] = parseInt(boxInnerHTML[ImgBox])+1 +'';
+                Box.style.height = '100%';
+                Box.style.width = '100%';
+                Box.style.background = 'rgba(93,88,89,0.5)';
+                Box.style.position = 'fixed';
+                Box.style.top = '0';
+                Box.className = 'box';
+                Box.style.left = '0';
+                index.appendChild(Box);
+
+                // 动态的创建一个弹窗在Box 上面一层
+                var alyBox = document.createElement('div');
+                alyBox.style.height = '3rem';
+                alyBox.style.width = '5rem';
+                alyBox.style.background = 'red';
+                alyBox.style.position = 'fixed';
+                alyBox.style.top = '50%';
+                alyBox.style.left = '50%';
+                alyBox.style.margin = '-1.5rem 0 0 -2.5rem';
+                alyBox.className = 'alyBox';
+                alyBox.innerHTML = '<div class="contentBox">dangdang送你'+ulBoxLi[ImgBox].firstChild.nextSibling.innerHTML+'</div><div class="thisBtn">我知道了</div>';
+                Box.appendChild(alyBox);
+
+                // 动态创建一个飞行的小粽子
+                var momo = document.createElement('div');
+                momo.style.height = '0';
+                momo.style.width = '0';
+                momo.style.background = 'red';
+                momo.style.position = 'absolute';
+                momo.style.top = '2rem';
+                momo.style.left = '3.2rem';
+                momo.style.zIndex = '99';
+                momo.style.opacity = '0';
+                momo.style.margin = '0';
+                momo.className = 'zongziBox';
+                dan.appendChild(momo);
+
+
+                var thisBtn = document.querySelector('.thisBtn');
+                thisBtn.addEventListener('click',function (){
+                    index.removeChild(Box);
+                    Box.removeChild(alyBox);
+                    clearTimeout(timer);
+                    timer = setTimeout(function (){
+                        // 小方块飞行等动作开始
+                        startMove(
+                                momo,
+                                {left:arrOffSetLeft[ImgBox],top:arrOffSetTop[ImgBox],opacity:1,width:ulBoxLi[ImgBox].clientWidth,height:ulBoxLi[ImgBox].clientHeight},
+                                {
+                                    duration:1000,
+                                    easing:'ease-out',
+                                    complete:function (){
+                                        momo.style.opacity = '0';
+                                        dan.removeChild(momo);
+                                        poo[ImgBox].innerHTML = parseInt(poo[ImgBox].innerHTML)+1;
+                                        ulBoxLi[ImgBox].style.background = 'red';   // 给飞出来的小方块赋值
+                                        // 计算出应该获得的套数  然后进行赋值
+                                        minNumber.innerHTML = getMaximin(boxInnerHTML,"min");
+                                    }});
+                    },100);
+                },false);
+            }});
+        }});
+    },false);
+
+    });
+</script>
